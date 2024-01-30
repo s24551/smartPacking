@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Ekspresowe Pakowanie</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body class="container mt-4">
+<h2>Tryb Ekspresowego Pakowania</h2>
+<div>
+    <p>Lista zamówień do pakowania w trybie ekspresowym:</p>
+    <ul class="list-group">
+        <li th:each="order : ${orders}" class="list-group-item">
+            <span th:text="${order.name}">Nazwa zamówienia</span> -
+            <span th:text="${order.status}">Status</span>
+        </li>
+    </ul>
+</div>
+<a href="/packing/startPacking" class="btn btn-primary mt-3">Powrót do wyboru trybu pakowania</a>
+</body>
+</html>

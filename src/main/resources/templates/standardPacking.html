@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Standardowe Pakowanie</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body class="container mt-4">
+<h2>Tryb Standardowego Pakowania</h2>
+<div>
+    <h3>Lista zamówień:</h3>
+    <ul class="list-group">
+        <li th:each="order : ${orders}" class="list-group-item">
+            <p><strong>Data zamówienia:</strong> <span th:text="${#dates.format(order.orderDate, 'dd-MM-yyyy')}">01-01-2024</span></p>
+            <p><strong>Zawartość zamówienia:</strong></p>
+            <ul class="list-group">
+                <li th:each="item : ${order.items}" class="list-group-item">
+                    <span th:text="${item.product.name}">Nazwa produktu</span> x
+                    <span th:text="${item.quantity}">Ilość</span>
+                    <div>
+                        <span><strong>Lokalizacja:</strong></span>
+                        <span th:text="${item.product.location?.aisle} ?: 'Nieznana alejka'">Alejka</span>,
+                        <span th:text="${item.product.location?.shelf} ?: 'Nieznany regał'">Regał</span>,
+                        <span th:text="${item.product.location?.position} ?: 'Nieznana pozycja'">Pozycja</span>
+                    </div>
+                </li>
+            </ul>
+            <form th:action="@{/packing/completeOrder}" method="post" class="mt-3">
+                <input type="hidden" th:name="orderId" th:value="${order.id}" />
+                <button type="submit" class="btn btn-success">Zamówienie skompletowane</button>
+            </form>
+        </li>
+    </ul>
+</div>
+<a href="/" class="btn btn-primary mt-3">Powrót do strony głównej</a>
+</body>
+</html>

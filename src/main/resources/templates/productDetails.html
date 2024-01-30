@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Szczegóły Produktu</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body class="container mt-4">
+<h2>Szczegóły produktu</h2>
+<div th:if="${product != null}" class="card">
+  <div class="card-body">
+    <h5 class="card-title" th:text="${product.name}">Nazwa produktu</h5>
+    <p class="card-text" th:text="${product.description}">Opis produktu</p>
+    <p class="card-text"><strong>Lokalizacja:</strong> Alejka: <span th:text="${product.location.aisle}">A</span>, Regał: <span th:text="${product.location.shelf}">R</span>, Pozycja: <span th:text="${product.location.position}">P</span></p>
+  </div>
+</div>
+<div th:if="${product == null}" class="alert alert-danger" role="alert">
+  <p>Produkt nie został znaleziony.</p>
+</div>
+<a href="/products/findProduct" class="btn btn-secondary mt-3">Wyszukaj inny produkt</a>
+</body>
+</html>
