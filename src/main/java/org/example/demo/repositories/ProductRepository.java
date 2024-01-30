@@ -11,5 +11,6 @@ public interface ProductRepository extends MongoRepository<Product, String> {
     // Tutaj możesz dodać własne metody zapytań, np. wyszukiwanie produktów po nazwie
     // List<Product> findByName(String name);
     Optional<Product> findByName(String name);
+    boolean existsByName(String name);
 
 }

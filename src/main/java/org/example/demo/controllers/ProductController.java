@@ -1,5 +1,6 @@
 package org.example.demo.controllers;
 
+import org.example.demo.models.Location;
 import org.example.demo.models.Product;
 import org.example.demo.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -73,5 +74,32 @@ public class ProductController {
     }
 
     // Metoda do wyszukiwania produktu po lokalizacji, jeśli potrzebna
+    @GetMapping("/add")
+    public String showAddProductForm() {
+        return "addProduct"; // Nazwa szablonu Thymeleaf
+    }
+
+
+    @GetMapping("/all")
+    public String listProducts(Model model) {
+        model.addAttribute("products", productService.findAllProducts());
+        return "listProducts"; // Nazwa szablonu Thymeleaf
+    }
+    @PostMapping("/add")
+    public String addProduct(@RequestParam("name") String name, @RequestParam("description") String description, @RequestParam("aisle") String aisle, @RequestParam("shelf") String shelf, @RequestParam("position") String position, Model model) {
+        Product product = new Product();
+        product.setName(name);
+        product.setDescription(description);
+
+        // Utwórz i ustaw obiekt Location dla produktu
+        Location location = new Location(aisle, shelf, position);
+        product.setLocation(location);
+
+        productService.save(product); // Zapisz produkt za pomocą serwisu
+
+        return "redirect:/products/add"; // Przekieruj do listy produktów
+    }
+
+
 }
 

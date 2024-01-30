@@ -24,6 +24,8 @@ public class Product {
         this.location = location;
     }
 
+
+
     public String getId() {
         return id;
     }

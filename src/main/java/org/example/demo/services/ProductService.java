@@ -40,6 +40,20 @@ public class ProductService {
         // Tutaj można dodać logikę walidacji lub inną logikę biznesową przed zapisaniem
         return productRepository.save(product);
     }
+    public void save(Product product) {
+        productRepository.save(product);
+    }
+    public boolean addProductIfNotExists(Product product) {
+        if (productRepository.existsByName(product.getName())) {
+            // Produkt o tej samej nazwie już istnieje
+            return false;
+        } else {
+            // Zapisz nowy produkt, ponieważ nie istnieje produkt o takiej samej nazwie
+            productRepository.save(product);
+            return true;
+        }
+    }
+
 
     public Product updateProduct(String id, Product updatedProduct) {
         if (productRepository.existsById(id)) {

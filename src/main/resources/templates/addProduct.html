@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Dodaj produkt</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body class="container mt-4">
+<h2>Dodaj nowy produkt</h2>
+<form th:action="@{/products/add}" method="post">
+    <div class="form-group">
+        <label for="name">Nazwa produktu:</label>
+        <input type="text" id="name" name="name" required class="form-control">
+    </div>
+    <div class="form-group">
+        <label for="description">Opis produktu:</label>
+        <textarea id="description" name="description" class="form-control"></textarea>
+    </div>
+    <div class="form-group">
+        <label for="aisle">Alejka:</label>
+        <input type="text" id="aisle" name="aisle" class="form-control">
+    </div>
+    <div class="form-group">
+        <label for="shelf">Regał:</label>
+        <input type="text" id="shelf" name="shelf" class="form-control">
+    </div>
+    <div class="form-group">
+        <label for="position">Pozycja:</label>
+        <input type="text" id="position" name="position" class="form-control">
+    </div>
+    <button type="submit" class="btn btn-primary">Dodaj produkt</button>
+    <div th:if="${error}" class="alert alert-danger" role="alert">
+        <p th:text="${error}">Komunikat o błędzie</p>
+    </div>
+</form>
+<a href="/" class="btn btn-secondary mt-3">Powrót do strony głównej</a>
+</body>
+</html>
